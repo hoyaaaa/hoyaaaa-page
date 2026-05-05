@@ -1,11 +1,11 @@
-import ButtonBase from '@mui/material/ButtonBase';
-import { styled } from '@mui/material/styles';
+import ButtonBase from '@mui/material/ButtonBase'
+import { styled } from '@mui/material/styles'
 
 export const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
   [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
+    width: '100% !important',
     height: 100,
   },
   '&:hover, &.Mui-focusVisible': {
@@ -20,7 +20,7 @@ export const ImageButton = styled(ButtonBase)(({ theme }) => ({
       border: '4px solid currentColor',
     },
   },
-}));
+}))
 
 export const ImageSrc = styled('span')({
   position: 'absolute',
@@ -30,7 +30,7 @@ export const ImageSrc = styled('span')({
   bottom: 0,
   backgroundSize: 'cover',
   backgroundPosition: 'center 40%',
-});
+})
 
 export const Image = styled('span')(({ theme }) => ({
   position: 'absolute',
@@ -42,7 +42,7 @@ export const Image = styled('span')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   color: theme.palette.common.white,
-}));
+}))
 
 export const ImageBackdrop = styled('span')(({ theme }) => ({
   position: 'absolute',
@@ -53,7 +53,7 @@ export const ImageBackdrop = styled('span')(({ theme }) => ({
   backgroundColor: theme.palette.common.black,
   opacity: 0.4,
   transition: theme.transitions.create('opacity'),
-}));
+}))
 
 export const ImageMarked = styled('span')(({ theme }) => ({
   height: 3,
@@ -63,4 +63,4 @@ export const ImageMarked = styled('span')(({ theme }) => ({
   bottom: -2,
   left: 'calc(50% - 9px)',
   transition: theme.transitions.create('opacity'),
-}));
+}))
