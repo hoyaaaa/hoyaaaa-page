@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 const pages = [
   { name: 'Apps', url: '/' },
+  { name: 'Resume', url: '/resume' },
   { name: 'Donate', url: '/donate' },
 ]
 
