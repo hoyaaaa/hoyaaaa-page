@@ -23,8 +23,6 @@ jobs:
 
       - name: Build
         run: npm run build
-        env:
-          VITE_GITHUB_ISSUE_KEY: ${{ secrets.VITE_GITHUB_ISSUE_KEY }}
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
