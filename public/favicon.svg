@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- Body -->
+  <ellipse cx="60" cy="68" rx="38" ry="32" fill="#a3e635"/>
+  <!-- Eyes bump -->
+  <circle cx="38" cy="40" r="16" fill="#a3e635"/>
+  <circle cx="82" cy="40" r="16" fill="#a3e635"/>
+  <!-- Eye white -->
+  <circle cx="38" cy="40" r="12" fill="white"/>
+  <circle cx="82" cy="40" r="12" fill="white"/>
+  <!-- Pupil -->
+  <circle cx="39" cy="41" r="7" fill="#1a1a1a"/>
+  <circle cx="83" cy="41" r="7" fill="#1a1a1a"/>
+  <!-- Eye shine -->
+  <circle cx="42" cy="38" r="2.5" fill="white"/>
+  <circle cx="86" cy="38" r="2.5" fill="white"/>
+  <!-- Nose -->
+  <ellipse cx="51" cy="62" rx="4" ry="3" fill="#84cc16"/>
+  <ellipse cx="69" cy="62" rx="4" ry="3" fill="#84cc16"/>
+  <!-- Smile -->
+  <path d="M 42 75 Q 60 88 78 75" stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Cheek blush -->
+  <ellipse cx="30" cy="74" rx="8" ry="5" fill="#f9a8d4" opacity="0.5"/>
+  <ellipse cx="90" cy="74" rx="8" ry="5" fill="#f9a8d4" opacity="0.5"/>
+</svg>

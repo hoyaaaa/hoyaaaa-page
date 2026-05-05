@@ -10,45 +10,40 @@ import Tooltip from '@mui/material/Tooltip'
 import { useNavigate } from 'react-router-dom'
 
 const pages = [
-  { name: 'apps', url: '/' },
-  { name: 'donate', url: '/donate' },
+  { name: 'Apps', url: '/' },
+  { name: 'Donate', url: '/donate' },
 ]
 
 export default function ResponsiveAppBar() {
   const navigate = useNavigate()
 
   return (
-    <AppBar position="static" style={{ background: '#66c89e' }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Button style={{ height: '100%' }}>
+    <AppBar position="static" elevation={0} sx={{ background: '#fff', borderBottom: '1px solid #e5e7eb' }}>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters sx={{ minHeight: 64 }}>
+          <Box sx={{ flexGrow: 0, mr: 4 }}>
             <img
               onClick={() => navigate('/')}
-              src="/images/hoyatech-logo.png"
-              alt="hoyatech"
-              style={{ width: '150px', cursor: 'pointer' }}
+              src="/favicon.svg"
+              alt="hoya dev"
+              style={{ width: '40px', cursor: 'pointer', display: 'block' }}
             />
-          </Button>
-          <Box
-            alignItems="center"
-            justifyContent="center"
-            sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-          >
+          </Box>
+          <Box sx={{ flexGrow: 1, display: 'flex', gap: 0.5 }}>
             {pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={() => navigate(page.url)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-                style={{ height: '100%' }}
+                sx={{ color: '#374151', fontWeight: 500, fontSize: '0.875rem', textTransform: 'none', px: 1.5 }}
               >
                 {page.name}
               </Button>
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open profile">
+            <Tooltip title="Profile">
               <IconButton onClick={() => navigate('/profile')} sx={{ p: 0 }}>
-                <Avatar alt="hoyaaaa" src="https://avatars.githubusercontent.com/hoyaaaa" />
+                <Avatar alt="hoyaaaa" src="https://avatars.githubusercontent.com/hoyaaaa" sx={{ width: 32, height: 32 }} />
               </IconButton>
             </Tooltip>
           </Box>
