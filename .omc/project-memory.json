@@ -1,0 +1,252 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1777986636274,
+  "projectRoot": "/Users/hoya/workspace/hoyaaaa-page",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "next",
+        "version": "latest",
+        "category": "fullstack"
+      },
+      {
+        "name": "react",
+        "version": "17.0.2",
+        "category": "frontend"
+      },
+      {
+        "name": "react-dom",
+        "version": "17.0.2",
+        "category": "frontend"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add -f out/ && git checkout -b temp-for-deploy-gh-pages && git commit -m \"Deploy Next.js to gh-pages\" && git subtree split --prefix out -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git checkout main && git branch -D temp-for-deploy-gh-pages"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "components",
+      "pages",
+      "public"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "components": {
+      "path": "components",
+      "purpose": "UI components",
+      "fileCount": 3,
+      "lastAccessed": 1777986636254,
+      "keyFiles": [
+        "AppBar.js",
+        "ImageButton.js",
+        "Layout.js"
+      ]
+    },
+    "pages": {
+      "path": "pages",
+      "purpose": "Page components",
+      "fileCount": 7,
+      "lastAccessed": 1777986636255,
+      "keyFiles": [
+        "_app.js",
+        "_document.js",
+        "_error.js",
+        "contact.js",
+        "donate.js"
+      ]
+    },
+    "public": {
+      "path": "public",
+      "purpose": "Public files",
+      "fileCount": 3,
+      "lastAccessed": 1777986636266,
+      "keyFiles": [
+        "favicon.ico",
+        "hoyatech-logo128.png",
+        "vercel.svg"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "src/App.jsx",
+      "accessCount": 3,
+      "lastAccessed": 1777987557347,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 2,
+      "lastAccessed": 1777986992890,
+      "type": "directory"
+    },
+    {
+      "path": "package.json",
+      "accessCount": 2,
+      "lastAccessed": 1777987223695,
+      "type": "file"
+    },
+    {
+      "path": "src/components/AppBar.jsx",
+      "accessCount": 2,
+      "lastAccessed": 1777987553441,
+      "type": "file"
+    },
+    {
+      "path": "pages/index.js",
+      "accessCount": 1,
+      "lastAccessed": 1777986995330,
+      "type": "file"
+    },
+    {
+      "path": "next.config.js",
+      "accessCount": 1,
+      "lastAccessed": 1777986995699,
+      "type": "file"
+    },
+    {
+      "path": "components/AppBar.js",
+      "accessCount": 1,
+      "lastAccessed": 1777986995988,
+      "type": "file"
+    },
+    {
+      "path": "pages/profile.js",
+      "accessCount": 1,
+      "lastAccessed": 1777986999254,
+      "type": "file"
+    },
+    {
+      "path": "pages/contact.js",
+      "accessCount": 1,
+      "lastAccessed": 1777986999626,
+      "type": "file"
+    },
+    {
+      "path": "pages/donate.js",
+      "accessCount": 1,
+      "lastAccessed": 1777986999770,
+      "type": "file"
+    },
+    {
+      "path": "pages/_document.js",
+      "accessCount": 1,
+      "lastAccessed": 1777987128314,
+      "type": "file"
+    },
+    {
+      "path": "pages/_app.js",
+      "accessCount": 1,
+      "lastAccessed": 1777987128368,
+      "type": "file"
+    },
+    {
+      "path": "components/Layout.js",
+      "accessCount": 1,
+      "lastAccessed": 1777987128452,
+      "type": "file"
+    },
+    {
+      "path": "components/ImageButton.js",
+      "accessCount": 1,
+      "lastAccessed": 1777987146065,
+      "type": "file"
+    },
+    {
+      "path": "vite.config.js",
+      "accessCount": 1,
+      "lastAccessed": 1777987230253,
+      "type": "file"
+    },
+    {
+      "path": "index.html",
+      "accessCount": 1,
+      "lastAccessed": 1777987238502,
+      "type": "file"
+    },
+    {
+      "path": "src/index.css",
+      "accessCount": 1,
+      "lastAccessed": 1777987246619,
+      "type": "file"
+    },
+    {
+      "path": "src/main.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987248863,
+      "type": "file"
+    },
+    {
+      "path": "src/components/Layout.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987254508,
+      "type": "file"
+    },
+    {
+      "path": "src/components/ImageButton.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987358316,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/Home.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987382802,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/Contact.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987411006,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/Donate.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987415196,
+      "type": "file"
+    },
+    {
+      "path": "src/pages/Profile.jsx",
+      "accessCount": 1,
+      "lastAccessed": 1777987416847,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
