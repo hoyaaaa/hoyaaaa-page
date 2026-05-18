@@ -3,9 +3,9 @@ import Footer from './Footer'
 
 export default function Layout({ children }) {
   return (
-    <section>
+    <section style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <ResponsiveAppBar />
-      <article style={{ margin: '16px 0' }}>
+      <article style={{ flex: 1, overflow: 'auto' }}>
         {children}
       </article>
       <Footer />
