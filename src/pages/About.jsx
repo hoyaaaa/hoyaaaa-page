@@ -1,5 +1,5 @@
-import { Box, Container, Typography } from '@mui/material'
-import { useLang } from '../context/LanguageContext'
+import { Box, Container, Typography, Select, MenuItem, FormControl } from '@mui/material'
+import { LanguageProvider, useLang } from '../context/LanguageContext'
 
 const content = {
   ko: {
@@ -16,26 +16,50 @@ const content = {
   },
 }
 
-export default function About() {
-  const { lang } = useLang()
+function AboutContent() {
+  const { lang, toggle } = useLang()
   const t = content[lang]
 
   return (
     <Container maxWidth="lg" sx={{ minHeight: '88vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', py: 8 }}>
       <Box sx={{ maxWidth: 560 }}>
-        <Typography variant="overline" sx={{ color: '#9ca3af', letterSpacing: 3, fontSize: '0.7rem' }}>
-          {t.label}
-        </Typography>
-        <Typography variant="h4" sx={{ fontWeight: 700, color: '#111827', mt: 1, mb: 2 }}>
-          {t.title}
-        </Typography>
-        <Typography sx={{ fontSize: '1rem', color: '#6b7280', lineHeight: 1.9, mb: 3 }}>
-          {t.desc}
-        </Typography>
-        <Typography sx={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.8 }}>
-          {t.role}
-        </Typography>
+        <Box sx={{ border: '1px solid #e5e7eb', borderRadius: 2, p: 4, mb: 3 }}>
+          <Typography variant="overline" sx={{ color: '#9ca3af', letterSpacing: 3, fontSize: '0.7rem' }}>
+            {t.label}
+          </Typography>
+          <Typography variant="h4" sx={{ fontWeight: 700, color: '#111827', mt: 1, mb: 2 }}>
+            {t.title}
+          </Typography>
+          <Typography sx={{ fontSize: '1rem', color: '#6b7280', lineHeight: 1.9, mb: 3 }}>
+            {t.desc}
+          </Typography>
+          <Typography sx={{ fontSize: '0.9rem', color: '#9ca3af', lineHeight: 1.8 }}>
+            {t.role}
+          </Typography>
+        </Box>
+
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Typography sx={{ fontSize: '0.875rem', color: '#6b7280' }}>언어</Typography>
+          <FormControl size="small" sx={{ minWidth: 140 }}>
+            <Select
+              value={lang}
+              onChange={e => e.target.value !== lang && toggle()}
+              sx={{ fontSize: '0.875rem' }}
+            >
+              <MenuItem value="ko">한국어</MenuItem>
+              <MenuItem value="en">English</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
       </Box>
     </Container>
+  )
+}
+
+export default function About() {
+  return (
+    <LanguageProvider>
+      <AboutContent />
+    </LanguageProvider>
   )
 }
