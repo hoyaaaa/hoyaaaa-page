@@ -2,11 +2,9 @@ import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
-import IconButton from '@mui/material/IconButton'
 import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
 import { useNavigate } from 'react-router-dom'
 
 const pages = [
@@ -42,11 +40,7 @@ export default function ResponsiveAppBar() {
             ))}
           </Box>
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Profile">
-              <IconButton onClick={() => navigate('/profile')} sx={{ p: 0 }}>
-                <Avatar alt="hoyaaaa" src="https://avatars.githubusercontent.com/hoyaaaa" sx={{ width: 32, height: 32 }} />
-              </IconButton>
-            </Tooltip>
+            <Avatar alt="hoyaaaa" src="https://avatars.githubusercontent.com/hoyaaaa" sx={{ width: 32, height: 32 }} />
           </Box>
         </Toolbar>
       </Container>
