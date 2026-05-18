@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout'
-import Home from './pages/Home'
+import About from './pages/About'
+import Apps from './pages/Apps'
 import Donate from './pages/Donate'
 import Resume from './pages/Resume'
 
@@ -9,7 +10,8 @@ export default function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<About />} />
+          <Route path="/apps" element={<Apps />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/resume" element={<Resume />} />
         </Routes>

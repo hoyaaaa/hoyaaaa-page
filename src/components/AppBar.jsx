@@ -6,15 +6,18 @@ import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
+import { useLang } from '../context/LanguageContext'
 
 const pages = [
-  { name: 'Apps', url: '/' },
+  { name: 'About', url: '/' },
+  { name: 'Apps', url: '/apps' },
   { name: 'Resume', url: '/resume' },
   { name: 'Donate', url: '/donate' },
 ]
 
 export default function ResponsiveAppBar() {
   const navigate = useNavigate()
+  const { lang, toggle } = useLang()
 
   return (
     <AppBar position="static" elevation={0} sx={{ background: '#fff', borderBottom: '1px solid #e5e7eb' }}>
@@ -39,7 +42,13 @@ export default function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <Button
+              onClick={toggle}
+              sx={{ minWidth: 0, px: 1.5, py: 0.5, fontSize: '0.75rem', fontWeight: 600, color: '#374151', border: '1px solid #e5e7eb', borderRadius: 1.5, textTransform: 'none' }}
+            >
+              {lang === 'ko' ? 'EN' : '한'}
+            </Button>
             <Avatar alt="hoyaaaa" src="https://avatars.githubusercontent.com/hoyaaaa" sx={{ width: 32, height: 32 }} />
           </Box>
         </Toolbar>
