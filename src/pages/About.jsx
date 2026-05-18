@@ -4,8 +4,8 @@ import { LanguageProvider, useLang } from '../context/LanguageContext'
 const content = {
   ko: {
     label: 'HOYA DEV',
-    title: '안녕하세요, 박창호입니다 👋',
-    desc: '서울을 기반으로 활동하는 소프트웨어 엔지니어입니다. 현재 Unboxers Corp에서 백엔드 개발자로 일하며, 틈틈이 사이드 프로젝트를 만들고 있습니다. 이 사이트는 제가 만든 것들을 공유하는 공간입니다.',
+    title: '안녕하세요 👋',
+    desc: '안녕하세요, 한국에서 백엔드 개발자로 일하고 있는 박창호입니다. 현재 Unboxers Corp에서 일하며 틈틈이 사이드 프로젝트를 만들고 있어요. 이 사이트는 제가 만든 것들을 올려두는 공간입니다.',
     role: '현재 @ Unboxers Corp · 백엔드 개발자',
   },
   en: {
