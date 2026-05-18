@@ -1,5 +1,5 @@
-import { Box, Container, Typography, Select, MenuItem, FormControl } from '@mui/material'
-import { LanguageProvider, useLang } from '../context/LanguageContext'
+import { Box, Container, Typography } from '@mui/material'
+import { useLang } from '../context/LanguageContext'
 
 const content = {
   ko: {
@@ -11,19 +11,19 @@ const content = {
   en: {
     label: 'HOYA DEV',
     title: "Hi, I'm Changho Park 👋",
-    desc: 'Software engineer based in Seoul, Korea. Currently working as a backend developer at Unboxers Corp, and building side projects in my spare time. This site is where I share what I\'ve made.',
+    desc: "Software engineer based in Korea. Currently working as a backend developer at Unboxers Corp, and building side projects in my spare time. This site is where I share what I've made.",
     role: 'Currently @ Unboxers Corp · Backend Developer',
   },
 }
 
-function AboutContent() {
-  const { lang, toggle } = useLang()
+export default function About() {
+  const { lang } = useLang()
   const t = content[lang]
 
   return (
     <Container maxWidth="lg" sx={{ minHeight: '88vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', py: 8 }}>
       <Box sx={{ maxWidth: 560 }}>
-        <Box sx={{ border: '1px solid #e5e7eb', borderRadius: 2, p: 4, mb: 3 }}>
+        <Box sx={{ border: '1px solid #e5e7eb', borderRadius: 2, p: 4 }}>
           <Typography variant="overline" sx={{ color: '#9ca3af', letterSpacing: 3, fontSize: '0.7rem' }}>
             {t.label}
           </Typography>
@@ -37,29 +37,7 @@ function AboutContent() {
             {t.role}
           </Typography>
         </Box>
-
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Typography sx={{ fontSize: '0.875rem', color: '#6b7280' }}>언어</Typography>
-          <FormControl size="small" sx={{ minWidth: 140 }}>
-            <Select
-              value={lang}
-              onChange={e => e.target.value !== lang && toggle()}
-              sx={{ fontSize: '0.875rem' }}
-            >
-              <MenuItem value="ko">한국어</MenuItem>
-              <MenuItem value="en">English</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
       </Box>
     </Container>
-  )
-}
-
-export default function About() {
-  return (
-    <LanguageProvider>
-      <AboutContent />
-    </LanguageProvider>
   )
 }

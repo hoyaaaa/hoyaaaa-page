@@ -1,4 +1,5 @@
 import ResponsiveAppBar from './AppBar'
+import Footer from './Footer'
 
 export default function Layout({ children }) {
   return (
@@ -7,6 +8,7 @@ export default function Layout({ children }) {
       <article style={{ margin: '16px 0' }}>
         {children}
       </article>
+      <Footer />
     </section>
   )
 }
