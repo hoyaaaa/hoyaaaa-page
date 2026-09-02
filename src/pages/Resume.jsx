@@ -1,8 +1,6 @@
-import { useState, useEffect } from 'react'
-import { pdf, Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer'
-import Box from '@mui/material/Box'
-import CircularProgress from '@mui/material/CircularProgress'
-import Typography from '@mui/material/Typography'
+import { useEffect, useState } from 'react'
+import { Document, Font, Link, Page, StyleSheet, Text, View, pdf } from '@react-pdf/renderer'
+import { useLang } from '../context/LanguageContext'
 
 Font.register({
   family: 'NotoSansKR',
@@ -12,392 +10,247 @@ Font.register({
   ],
 })
 
+const C = { ink: '#171714', muted: '#67675f', line: '#d4d0c5', red: '#c53c2e', paper: '#faf8f2', soft: '#efede5' }
 const s = StyleSheet.create({
-  page: {
-    flexDirection: 'column',
-    fontFamily: 'NotoSansKR',
-    fontSize: 10,
-    color: '#1a1a1a',
-    paddingTop: 56,
-    paddingBottom: 56,
-    paddingHorizontal: 60,
-  },
-
-  // ── Header ───────────────────────────────
-  header: {
-    flexDirection: 'column',
-    marginBottom: 24,
-    paddingBottom: 16,
-    borderBottom: '2px solid #1a1a1a',
-  },
-  nameRow: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginBottom: 6,
-  },
-  nameKo: {
-    fontSize: 26,
-    fontWeight: 700,
-    marginRight: 10,
-  },
-  nameEn: {
-    fontSize: 14,
-    color: '#555',
-  },
-  role: {
-    fontSize: 11,
-    color: '#444',
-    marginBottom: 8,
-  },
-  contactRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  contactDivider: {
-    fontSize: 9,
-    color: '#bbb',
-    marginHorizontal: 6,
-  },
-  contactItem: {
-    fontSize: 9,
-    color: '#555',
-  },
-  contactDot: {
-    fontSize: 9,
-    color: '#bbb',
-    marginHorizontal: 6,
-  },
-
-  // ── Section ──────────────────────────────
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 10,
-    fontWeight: 700,
-    color: '#1a1a1a',
-    textTransform: 'uppercase',
-    letterSpacing: 2,
-    marginBottom: 10,
-    paddingBottom: 4,
-    borderBottom: '1px solid #d1d5db',
-  },
-
-  // ── Summary ──────────────────────────────
-  summary: {
-    fontSize: 10,
-    color: '#374151',
-    lineHeight: 1.8,
-  },
-
-  // ── Experience Item ───────────────────────
-  item: {
-    marginBottom: 14,
-  },
-  itemTop: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'baseline',
-    marginBottom: 1,
-  },
-  itemTitle: {
-    fontWeight: 700,
-    fontSize: 11,
-  },
-  itemDate: {
-    fontSize: 9,
-    color: '#6b7280',
-  },
-  itemOrg: {
-    fontSize: 10,
-    color: '#374151',
-    marginBottom: 5,
-  },
-  bullet: {
-    fontSize: 10,
-    color: '#374151',
-    marginBottom: 2,
-    paddingLeft: 10,
-  },
-  stackRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 5,
-  },
-  stackTag: {
-    fontSize: 8.5,
-    color: '#374151',
-    backgroundColor: '#f3f4f6',
-    padding: '2 6',
-    borderRadius: 2,
-    marginRight: 4,
-    marginBottom: 3,
-  },
-
-  // ── Skills ────────────────────────────────
-  skillRow: {
-    flexDirection: 'row',
-    marginBottom: 6,
-  },
-  skillCategory: {
-    fontWeight: 700,
-    fontSize: 10,
-    width: 80,
-    color: '#374151',
-  },
-  skillValues: {
-    flex: 1,
-    fontSize: 10,
-    color: '#374151',
-  },
-
-  // ── Education ────────────────────────────
-  eduRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-  },
-  eduLeft: {
-    flex: 1,
-  },
-  eduTitle: {
-    fontWeight: 700,
-    fontSize: 10.5,
-    marginBottom: 1,
-  },
-  eduSub: {
-    fontSize: 9.5,
-    color: '#555',
-  },
-  eduDate: {
-    fontSize: 9,
-    color: '#6b7280',
-  },
+  page: { fontFamily: 'NotoSansKR', fontSize: 9.2, color: C.ink, backgroundColor: C.paper, padding: '46 52 44' },
+  topRule: { height: 5, backgroundColor: C.red, marginBottom: 24 },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 24 },
+  name: { fontSize: 28, fontWeight: 700, letterSpacing: -1.2 },
+  nameEn: { fontSize: 10, color: C.muted, marginTop: 4, letterSpacing: 1.3 },
+  headline: { width: 220, fontSize: 10.5, lineHeight: 1.5, textAlign: 'right', fontWeight: 700 },
+  contact: { flexDirection: 'row', paddingVertical: 10, borderTop: `1px solid ${C.line}`, borderBottom: `1px solid ${C.line}`, marginBottom: 24 },
+  contactItem: { fontSize: 8, color: C.muted, marginRight: 16 },
+  section: { marginBottom: 22 },
+  sectionLabel: { color: C.red, fontSize: 7.5, fontWeight: 700, letterSpacing: 1.8, marginBottom: 9 },
+  summary: { fontSize: 10.2, lineHeight: 1.75, color: '#383832' },
+  experience: { paddingTop: 12, borderTop: `1px solid ${C.line}`, marginBottom: 16 },
+  expTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 3 },
+  expCompany: { fontSize: 13.5, fontWeight: 700 },
+  expDate: { color: C.red, fontSize: 7.8, fontWeight: 700, letterSpacing: .7 },
+  expRole: { color: C.muted, fontSize: 8.7, marginBottom: 8 },
+  bullet: { flexDirection: 'row', marginBottom: 4, paddingRight: 8 },
+  bulletMark: { width: 12, color: C.red, fontWeight: 700 },
+  bulletText: { flex: 1, fontSize: 9.1, lineHeight: 1.55, color: '#363630' },
+  tags: { flexDirection: 'row', flexWrap: 'wrap', marginTop: 7 },
+  tag: { fontSize: 7.2, color: '#4d4d47', backgroundColor: C.soft, padding: '3 6', marginRight: 4, marginBottom: 4 },
+  twoCol: { flexDirection: 'row' },
+  mainCol: { width: '65%', paddingRight: 26 },
+  sideCol: { width: '35%', paddingLeft: 22, borderLeft: `1px solid ${C.line}` },
+  skillGroup: { marginBottom: 13 },
+  skillTitle: { fontSize: 8.4, fontWeight: 700, marginBottom: 4 },
+  skillText: { fontSize: 8.3, lineHeight: 1.55, color: C.muted },
+  project: { paddingVertical: 11, borderTop: `1px solid ${C.line}` },
+  projectTop: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 4 },
+  projectTitle: { fontSize: 11, fontWeight: 700 },
+  projectType: { color: C.red, fontSize: 7.2, fontWeight: 700, letterSpacing: .8 },
+  projectBody: { fontSize: 8.8, lineHeight: 1.55, color: '#41413b', marginBottom: 4 },
+  projectLink: { fontSize: 7.5, color: C.muted, textDecoration: 'none' },
+  edu: { marginBottom: 12 },
+  eduTitle: { fontSize: 9.5, fontWeight: 700, marginBottom: 2 },
+  eduSub: { fontSize: 8.2, lineHeight: 1.5, color: C.muted },
+  philosophy: { padding: 14, backgroundColor: C.soft, marginTop: 8 },
+  philosophyText: { fontSize: 9.2, lineHeight: 1.65 },
+  footer: { position: 'absolute', left: 52, right: 52, bottom: 24, paddingTop: 7, borderTop: `1px solid ${C.line}`, flexDirection: 'row', justifyContent: 'space-between', color: C.muted, fontSize: 7 },
 })
 
-const Bullet = ({ children }) => (
-  <Text style={s.bullet}>{'• '}{children}</Text>
-)
+const content = {
+  ko: {
+    headline: 'Go로 신뢰할 수 있는 프로덕션 시스템을 만드는 백엔드 엔지니어',
+    about: '인증과 권한, API 계약, 데이터 경계처럼 정확해야 하는 영역을 중심으로 Go 서버를 개발하고 운영합니다. 모호한 정책을 명시적인 계약으로 바꾸고, 운영 문제를 재현 가능한 테스트와 작은 변경으로 해결하는 일을 좋아합니다. 클라이언트 개발 경험을 바탕으로 서버와 화면 양쪽의 경계를 함께 설계합니다.',
+    section: { about: 'ABOUT', experience: 'EXPERIENCE', skills: 'CORE SKILLS', projects: 'SELECTED PUBLIC WORK', education: 'EDUCATION & ACTIVITIES', principles: 'ENGINEERING PRINCIPLES' },
+    experience: [
+      {
+        company: 'Unboxers Corp', role: 'Backend Engineer', date: '2024 — 현재',
+        bullets: [
+          '교육 운영 플랫폼의 Go 백엔드와 여러 웹 클라이언트가 공유하는 API·데이터 계약을 개발하고 운영합니다.',
+          '역할·스코프 기반 접근 제어, Bearer·쿠키 인증, 단기 Context Token, 감사 로그를 fail-closed 정책으로 설계했습니다.',
+          'PostgreSQL을 권한과 도메인 데이터의 원본으로 두고 OpenAPI, RLS projection, 스키마 변화와 단계적 롤아웃 경계를 연결했습니다.',
+          '운영 중복 요청과 지연을 계측해 동일 동시 요청을 하나의 DB 조회로 병합하고 race·회귀 테스트로 고정했습니다.',
+          '백엔드뿐 아니라 TypeScript 웹 클라이언트, E2E, Grafana 관측 지표와 CI까지 필요한 경계를 직접 연결합니다.',
+        ],
+        tags: ['Go', 'PostgreSQL', 'OpenAPI', 'Supabase', 'Grafana', 'Docker', 'GitHub Actions'],
+      },
+      {
+        company: 'Samsung Electronics', role: 'Software Engineer · AI Development Group', date: '2019 — 2024',
+        bullets: [
+          'Bixby 음성 인식 Language Model의 학습·검증·글로벌 프로덕션 배포 파이프라인을 설계하고 자동화했습니다.',
+          '수억 건 규모 음성 데이터 전처리와 비동기 분석 파이프라인을 개발하고 처리 효율과 운영 가시성을 개선했습니다.',
+          'WER, 인식률, 응답 지연을 비교·분석하는 내부 웹 도구와 실시간 KPI 대시보드를 풀스택으로 개발했습니다.',
+          '모델 성능 모니터링과 Jenkins·CircleCI 기반 학습·배포 CI/CD 체계를 구축했습니다.',
+        ],
+        tags: ['Python', 'FastAPI', 'Celery', 'Redis', 'TensorFlow', 'AWS', 'Jenkins', 'CircleCI'],
+      },
+      {
+        company: 'Samsung Electronics', role: 'Software Engineering Intern · Voice Service', date: '2015',
+        bullets: ['R과 Hadoop으로 S-Voice 메타데이터 품질 지표를 분석하고 시각화 보고서를 만들었습니다.'],
+        tags: ['R', 'Hadoop'],
+      },
+    ],
+    skills: [
+      ['Backend', 'Go, Python, HTTP APIs, OpenAPI, authentication, authorization, idempotency'],
+      ['Data', 'PostgreSQL, MySQL, Redis, Supabase, schema evolution, RLS'],
+      ['Reliability', 'Observability, concurrency, race testing, performance profiling, incident response'],
+      ['Delivery', 'Docker, GitHub Actions, Jenkins, CircleCI, staged rollout and rollback'],
+      ['Clients', 'TypeScript, React, Flutter — enough to design both sides of an API boundary'],
+    ],
+    projects: [
+      ['nsfw_detector_flutter', 'PACKAGE · 2026', '이미지를 외부 서버로 보내지 않는 Flutter 온디바이스 분류 패키지. isolate, GPU fallback, 배치 처리와 런타임 회귀 테스트를 제공합니다.', 'github.com/hoyaaaa/nsfw_detector_flutter'],
+      ['trackpoint-daemon-macos', 'SYSTEM UTILITY · 2026', 'CGEventTap과 IOHID를 활용해 ThinkPad TrackPoint 키보드의 스크롤, 키 매핑, 포인터 동작을 macOS에 맞게 구현했습니다.', 'github.com/hoyaaaa/trackpoint-daemon-macos'],
+      ['AoE2DE Font Mod', 'TOOLING · 2026', '게임의 코드포인트를 읽고 글리프와 DDS 텍스처 아틀라스를 재생성해 macOS 버전에 한글 폰트를 적용합니다.', 'github.com/hoyaaaa/aoe2de-font-mod'],
+      ['pgschema', 'OPEN SOURCE · 2026', '임시 스키마 이름 변경 이후 뷰 정의가 흔들리는 문제를 정규화하는 Go 수정 사항을 upstream에 기여했습니다.', 'github.com/pgplex/pgschema/pull/520'],
+    ],
+    education: [
+      ['한양대학교', '컴퓨터공학부 · 2013 — 2019'],
+      ['경남과학고등학교', '2011 — 2013'],
+      ['Samsung SDS ICT Membership', 'sGen Club 개발자 트랙 · 2014 — 2015'],
+    ],
+    principles: '명시적인 계약을 숨은 가정보다 선호합니다. 자신감 있는 추측보다 검증 가능한 증거를, 큰 재작성보다 문제를 온전히 해결하는 가장 작은 변경을 선택합니다.',
+  },
+  en: {
+    headline: 'Backend engineer building reliable production systems in Go',
+    about: 'I build and operate Go services around the parts where correctness matters most: identity, authorization, API contracts, and data boundaries. I enjoy turning ambiguous policies into explicit contracts, and production incidents into reproducible tests and small, measurable changes. My client-side background helps me design both sides of an API boundary.',
+    section: { about: 'ABOUT', experience: 'EXPERIENCE', skills: 'CORE SKILLS', projects: 'SELECTED PUBLIC WORK', education: 'EDUCATION & ACTIVITIES', principles: 'ENGINEERING PRINCIPLES' },
+    experience: [
+      { company: 'Unboxers Corp', role: 'Backend Engineer', date: '2024 — PRESENT', bullets: ['Build and operate Go services and shared API/data contracts across an education operations platform and its web clients.', 'Designed fail-closed role- and scope-based access control spanning bearer and cookie authentication, short-lived context tokens, and audit trails.', 'Connected PostgreSQL as the source of truth with OpenAPI contracts, RLS projections, schema evolution, and staged rollout boundaries.', 'Measured a production request fan-out and coalesced identical concurrent work into one database read, locked down with race and regression tests.', 'Work across Go services, TypeScript clients, E2E coverage, Grafana telemetry, and CI when a system boundary requires it.'], tags: ['Go', 'PostgreSQL', 'OpenAPI', 'Supabase', 'Grafana', 'Docker', 'GitHub Actions'] },
+      { company: 'Samsung Electronics', role: 'Software Engineer · AI Development Group', date: '2019 — 2024', bullets: ['Designed and automated training, validation, and global production deployment pipelines for Bixby speech-recognition language models.', 'Built preprocessing and asynchronous analytics pipelines over hundreds of millions of speech records.', 'Developed internal full-stack tools for WER, recognition quality, latency analysis, and real-time KPI visualization.', 'Established model monitoring and CI/CD workflows with Jenkins and CircleCI.'], tags: ['Python', 'FastAPI', 'Celery', 'Redis', 'TensorFlow', 'AWS', 'Jenkins', 'CircleCI'] },
+      { company: 'Samsung Electronics', role: 'Software Engineering Intern · Voice Service', date: '2015', bullets: ['Analyzed S-Voice metadata quality metrics with R and Hadoop and produced visualization reports.'], tags: ['R', 'Hadoop'] },
+    ],
+    skills: [
+      ['Backend', 'Go, Python, HTTP APIs, OpenAPI, authentication, authorization, idempotency'],
+      ['Data', 'PostgreSQL, MySQL, Redis, Supabase, schema evolution, RLS'],
+      ['Reliability', 'Observability, concurrency, race testing, performance profiling, incident response'],
+      ['Delivery', 'Docker, GitHub Actions, Jenkins, CircleCI, staged rollout and rollback'],
+      ['Clients', 'TypeScript, React, Flutter — enough to design both sides of an API boundary'],
+    ],
+    projects: [
+      ['nsfw_detector_flutter', 'PACKAGE · 2026', 'On-device image classification for Flutter with background isolates, GPU fallback, batching, and hardened runtime tests.', 'github.com/hoyaaaa/nsfw_detector_flutter'],
+      ['trackpoint-daemon-macos', 'SYSTEM UTILITY · 2026', 'A CGEventTap and IOHID menu-bar daemon that makes TrackPoint scrolling, key mapping, and pointer behavior native on macOS.', 'github.com/hoyaaaa/trackpoint-daemon-macos'],
+      ['AoE2DE Font Mod', 'TOOLING · 2026', 'Rebuilds glyphs and DDS texture atlases from the game’s codepoint map to bring Korean fonts to the macOS version.', 'github.com/hoyaaaa/aoe2de-font-mod'],
+      ['pgschema', 'OPEN SOURCE · 2026', 'Contributed a Go fix that normalizes view definitions after temporary schema renames in declarative Postgres migrations.', 'github.com/pgplex/pgschema/pull/520'],
+    ],
+    education: [['Hanyang University', 'B.S. in Computer Science & Engineering · 2013 — 2019'], ['Gyeongnam Science High School', '2011 — 2013'], ['Samsung SDS ICT Membership', 'sGen Club developer track · 2014 — 2015']],
+    principles: 'I prefer explicit contracts over hidden assumptions, verifiable evidence over confident guesses, and the smallest change that fully solves the problem over a sweeping rewrite.',
+  },
+}
 
-const StackTags = ({ tags }) => (
-  <View style={s.stackRow}>
-    {tags.map(t => <Text key={t} style={s.stackTag}>{t}</Text>)}
-  </View>
-)
+function Bullet({ children }) {
+  return <View style={s.bullet}><Text style={s.bulletMark}>—</Text><Text style={s.bulletText}>{children}</Text></View>
+}
 
-const ResumeDoc = () => (
-  <Document title="박창호_이력서">
-    <Page size="A4" style={s.page}>
+function Tags({ items }) {
+  return <View style={s.tags}>{items.map((item) => <Text key={item} style={s.tag}>{item}</Text>)}</View>
+}
 
-      {/* ── Header ── */}
-      <View style={s.header}>
-        <View style={s.nameRow}>
-          <Text style={s.nameKo}>박창호</Text>
-          <Text style={s.nameEn}>Changho Park</Text>
+function Footer() {
+  return (
+    <View style={s.footer} fixed>
+      <Text>CHANGHO PARK · BACKEND ENGINEER</Text>
+      <Text render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`} />
+    </View>
+  )
+}
+
+function ResumeDoc({ lang }) {
+  const t = content[lang]
+  return (
+    <Document title={`Changho Park — ${t.headline}`} author="Changho Park" subject="Backend Engineer Resume">
+      <Page size="A4" style={s.page}>
+        <View style={s.topRule} />
+        <View style={s.header}>
+          <View><Text style={s.name}>박창호</Text><Text style={s.nameEn}>CHANGHO PARK</Text></View>
+          <Text style={s.headline}>{t.headline}</Text>
         </View>
-        <Text style={s.role}>Software Engineer · Full-stack Developer</Text>
-        <View style={s.contactRow}>
-          <Text style={s.contactItem}>pch4463@gmail.com</Text>
-          <Text style={s.contactDot}>·</Text>
-          <Text style={s.contactItem}>github.com/hoyaaaa</Text>
-          <Text style={s.contactDot}>·</Text>
-          <Text style={s.contactItem}>linkedin.com/in/박창호</Text>
-          <Text style={s.contactDot}>·</Text>
+        <View style={s.contact}>
           <Text style={s.contactItem}>Seoul, Korea</Text>
+          <Text style={s.contactItem}>hoya.develop@gmail.com</Text>
+          <Text style={s.contactItem}>github.com/hoyaaaa</Text>
+          <Text style={s.contactItem}>linkedin.com/in/hoyaaaa</Text>
         </View>
-      </View>
+        <View style={s.section}><Text style={s.sectionLabel}>{t.section.about}</Text><Text style={s.summary}>{t.about}</Text></View>
+        <View style={s.section}>
+          <Text style={s.sectionLabel}>{t.section.experience}</Text>
+          {t.experience.map((exp) => (
+            <View style={s.experience} key={`${exp.company}-${exp.date}`} wrap={false}>
+              <View style={s.expTop}><Text style={s.expCompany}>{exp.company}</Text><Text style={s.expDate}>{exp.date}</Text></View>
+              <Text style={s.expRole}>{exp.role}</Text>
+              {exp.bullets.map((item) => <Bullet key={item}>{item}</Bullet>)}
+              <Tags items={exp.tags} />
+            </View>
+          ))}
+        </View>
+        <Footer />
+      </Page>
 
-      {/* ── Summary ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>About</Text>
-        <Text style={s.summary}>
-          삼성전자 AI 개발 그룹에서 Bixby 음성 인식 서버 개발 경험을 쌓아온 소프트웨어 엔지니어입니다.
-          Language Model 학습 및 배포, 대용량 데이터 파이프라인, CI/CD 자동화까지 폭넓은 개발 역량을 보유하고 있으며,
-          풀스택 개발자로서 백엔드부터 프론트엔드까지 창의적인 아이디어를 코드로 구현하는 것을 즐깁니다.
-        </Text>
-      </View>
-
-      {/* ── Experience ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>Experience</Text>
-
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>ASR 서버 파트 · AI 개발 그룹</Text>
-            <Text style={s.itemDate}>2021.01 – 현재</Text>
+      <Page size="A4" style={s.page}>
+        <View style={s.topRule} />
+        <View style={s.twoCol}>
+          <View style={s.mainCol}>
+            <View style={s.section}>
+              <Text style={s.sectionLabel}>{t.section.projects}</Text>
+              {t.projects.map(([title, type, body, href]) => (
+                <View style={s.project} key={title} wrap={false}>
+                  <View style={s.projectTop}><Text style={s.projectTitle}>{title}</Text><Text style={s.projectType}>{type}</Text></View>
+                  <Text style={s.projectBody}>{body}</Text>
+                  <Link src={`https://${href}`} style={s.projectLink}>{href} ↗</Link>
+                </View>
+              ))}
+            </View>
           </View>
-          <Text style={s.itemOrg}>삼성전자 무선사업부 · Samsung Electronics Mobile Division</Text>
-          <Bullet>Bixby 음성 인식 서버 ASR Language Model 학습 파이프라인 설계 및 자동화</Bullet>
-          <Bullet>학습 모델 스테이징 검증 후 글로벌 프로덕션 배포 운영 관리</Bullet>
-          <Bullet>수억 건 규모의 음성 데이터 전처리 파이프라인 개발로 처리 효율 대폭 개선</Bullet>
-          <Bullet>Sumo Logic 기반 실시간 모델 성능 모니터링 체계 구축</Bullet>
-          <Bullet>Jenkins·CircleCI를 활용한 ML 학습 및 배포 CI/CD 파이프라인 구축</Bullet>
-          <StackTags tags={['Python', 'FastAPI', 'Selenium', 'Java', 'Kotlin', 'TensorFlow', 'AWS EC2/ECR', 'Jenkins', 'CircleCI', 'Sumo Logic']} />
-        </View>
-
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>Metric 파트 · AI 개발 그룹</Text>
-            <Text style={s.itemDate}>2019.06 – 2020.12</Text>
+          <View style={s.sideCol}>
+            <View style={s.section}>
+              <Text style={s.sectionLabel}>{t.section.skills}</Text>
+              {t.skills.map(([title, body]) => <View style={s.skillGroup} key={title}><Text style={s.skillTitle}>{title}</Text><Text style={s.skillText}>{body}</Text></View>)}
+            </View>
+            <View style={s.section}>
+              <Text style={s.sectionLabel}>{t.section.education}</Text>
+              {t.education.map(([title, body]) => <View style={s.edu} key={title}><Text style={s.eduTitle}>{title}</Text><Text style={s.eduSub}>{body}</Text></View>)}
+            </View>
           </View>
-          <Text style={s.itemOrg}>삼성전자 무선사업부 · Samsung Electronics Mobile Division</Text>
-          <Bullet>Bixby 음성 인식 품질 지표 (WER, 인식률, 응답 지연 등) 분석 체계 수립</Bullet>
-          <Bullet>ASR 전사(Transcription) 결과 비교·분석 웹 툴 풀스택 단독 개발 및 배포</Bullet>
-          <Bullet>실시간 KPI 시각화 대시보드 개발로 팀 내 데이터 기반 의사결정 지원</Bullet>
-          <Bullet>Celery·Redis 비동기 배치 처리 아키텍처 적용으로 대량 데이터 분석 성능 개선</Bullet>
-          <StackTags tags={['Python', 'Flask', 'Celery', 'Redis', 'Java', 'Spring', 'Node.js', 'JavaScript', 'AWS EC2/EB/Lambda', 'Jenkins', 'CircleCI', 'C#']} />
         </View>
-
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>인턴십 · 보이스 서비스 개발그룹</Text>
-            <Text style={s.itemDate}>2015.01 – 2015.02</Text>
-          </View>
-          <Text style={s.itemOrg}>삼성전자 무선사업부 · Samsung Electronics Mobile Division</Text>
-          <Bullet>R과 Hadoop을 활용한 S-Voice metadata metric 분석 및 시각화 보고서 작성</Bullet>
-          <StackTags tags={['R', 'Hadoop']} />
+        <View style={s.section}>
+          <Text style={s.sectionLabel}>{t.section.principles}</Text>
+          <View style={s.philosophy}><Text style={s.philosophyText}>{t.principles}</Text></View>
         </View>
-      </View>
-
-      {/* ── Projects ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>Projects</Text>
-
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>#실시간 검색어 · Chrome Extension</Text>
-          </View>
-          <Text style={s.itemOrg}>개인 프로젝트 · Chrome Web Store 출시</Text>
-          <Bullet>네이버·다음·구글 등 포털 사이트별 실시간 검색어를 새탭에서 즉시 확인하는 크롬 확장 프로그램</Bullet>
-          <Bullet>백엔드 API 설계부터 프론트엔드 UI까지 풀스택 단독 개발 및 운영</Bullet>
-          <StackTags tags={['React', 'JavaScript', 'FastAPI', 'MySQL', 'Heroku', 'AWS Lightsail']} />
-        </View>
-
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>코상인 (Co-sangin)</Text>
-            <Text style={s.itemDate}>팀 프로젝트 · Frontend 개발</Text>
-          </View>
-          <Text style={s.itemOrg}>CO-GGIRI · PM 1, Frontend 2, Backend 3</Text>
-          <Bullet>상인과 고객을 이어주는 위치 기반 SNS — 피드, 실시간 메신저 기능 구현</Bullet>
-          <Bullet>Redux를 활용한 전역 상태 관리 및 컴포넌트 설계 담당</Bullet>
-          <StackTags tags={['React', 'Redux', 'JavaScript', 'Spring', 'PostgreSQL']} />
-        </View>
-
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>Electree</Text>
-            <Text style={s.itemDate}>sGen Club · Android 개발</Text>
-          </View>
-          <Text style={s.itemOrg}>Samsung SDS ICT Membership · PM 1, HW 2, Android 2, Designer 1</Text>
-          <Bullet>안드로이드 앱으로 원격 콘센트 ON/OFF 제어 및 실시간 전력량 모니터링</Bullet>
-          <Bullet>Android 앱 개발 및 Arduino 시리얼 통신 연동 담당</Bullet>
-          <StackTags tags={['Android', 'Java', 'Arduino']} />
-        </View>
-      </View>
-
-      {/* ── Skills ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>Skills</Text>
-        <View style={s.skillRow}>
-          <Text style={s.skillCategory}>Frontend</Text>
-          <Text style={s.skillValues}>HTML, CSS, JavaScript, TypeScript, React, jQuery</Text>
-        </View>
-        <View style={s.skillRow}>
-          <Text style={s.skillCategory}>Backend</Text>
-          <Text style={s.skillValues}>Python, FastAPI, Django, Java, Kotlin, Spring, MySQL</Text>
-        </View>
-        <View style={s.skillRow}>
-          <Text style={s.skillCategory}>Cloud</Text>
-          <Text style={s.skillValues}>AWS (EC2, ECR, EB, Lambda, Lightsail), Heroku</Text>
-        </View>
-        <View style={s.skillRow}>
-          <Text style={s.skillCategory}>CI/CD</Text>
-          <Text style={s.skillValues}>Jenkins, Groovy, CircleCI, GitHub Actions</Text>
-        </View>
-        <View style={s.skillRow}>
-          <Text style={s.skillCategory}>AI / ML</Text>
-          <Text style={s.skillValues}>TensorFlow, ASR, Language Model Training</Text>
-        </View>
-        <View style={s.skillRow}>
-          <Text style={s.skillCategory}>Tools</Text>
-          <Text style={s.skillValues}>Git, GitHub, Jira, Confluence</Text>
-        </View>
-      </View>
-
-      {/* ── Education ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>Education</Text>
-        <View style={s.eduRow}>
-          <View style={s.eduLeft}>
-            <Text style={s.eduTitle}>한양대학교 (Hanyang University)</Text>
-            <Text style={s.eduSub}>컴퓨터공학부 (Dept. of Computer Science & Engineering)</Text>
-            <Text style={s.eduSub}>알고리즘 동아리 · 안드로이드 동아리 · 학생회</Text>
-          </View>
-          <Text style={s.eduDate}>2013.03 – 2019.02</Text>
-        </View>
-        <View style={s.eduRow}>
-          <View style={s.eduLeft}>
-            <Text style={s.eduTitle}>경남과학고등학교 (Gyeongnam Science High School)</Text>
-          </View>
-          <Text style={s.eduDate}>2011.03 – 2013.02</Text>
-        </View>
-      </View>
-
-      {/* ── Activities ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>Activities</Text>
-        <View style={s.item}>
-          <View style={s.itemTop}>
-            <Text style={s.itemTitle}>sGen Club · Samsung SDS ICT Membership</Text>
-            <Text style={s.itemDate}>2014.07 – 2015.06</Text>
-          </View>
-          <Bullet>개발자 트랙으로 활동 · 팀 프로젝트 Electree 기획 및 Android 개발 담당</Bullet>
-        </View>
-      </View>
-
-      {/* ── Certificates ── */}
-      <View style={s.section}>
-        <Text style={s.sectionTitle}>Certificates</Text>
-        <Text style={[s.bullet]}>• 정보처리산업기사 (Industrial Engineer Information Processing)</Text>
-      </View>
-
-    </Page>
-  </Document>
-)
-
+        <Footer />
+      </Page>
+    </Document>
+  )
+}
 
 export default function Resume() {
+  const { lang } = useLang()
   const [pdfUrl, setPdfUrl] = useState(null)
 
   useEffect(() => {
-    pdf(<ResumeDoc />)
-      .toBlob()
-      .then((blob) => {
-        const url = URL.createObjectURL(blob)
-        setPdfUrl(url)
-      })
-
+    let objectUrl
+    let alive = true
+    setPdfUrl(null)
+    pdf(<ResumeDoc lang={lang} />).toBlob().then((blob) => {
+      if (!alive) return
+      objectUrl = URL.createObjectURL(blob)
+      setPdfUrl(objectUrl)
+    })
     return () => {
-      if (pdfUrl) URL.revokeObjectURL(pdfUrl)
+      alive = false
+      if (objectUrl) URL.revokeObjectURL(objectUrl)
     }
-  }, [])
+  }, [lang])
 
   if (!pdfUrl) {
-    return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: 'calc(100vh - 64px)', gap: 2 }}>
-        <CircularProgress size={32} sx={{ color: '#374151' }} />
-        <Typography sx={{ color: '#9ca3af', fontSize: '0.875rem' }}>이력서 생성 중...</Typography>
-      </Box>
-    )
+    return <div className="resume-loading"><div className="loading-copy"><div className="loading-reel" /><p>{lang === 'ko' ? '이력서를 만들고 있습니다…' : 'Preparing the résumé…'}</p></div></div>
   }
 
+  const filename = `Changho_Park_Resume_${lang.toUpperCase()}.pdf`
   return (
-    <embed
-      src={pdfUrl}
-      type="application/pdf"
-      width="100%"
-      style={{ height: 'calc(100vh - 64px)', display: 'block' }}
-    />
+    <div className="resume-page">
+      <div className="resume-toolbar">
+        <p>{lang === 'ko' ? '현재 GitHub 활동과 경력을 반영한 2페이지 PDF 이력서' : 'A two-page PDF résumé based on current work and GitHub activity'}</p>
+        <div className="resume-actions">
+          <a href={pdfUrl} target="_blank" rel="noreferrer">{lang === 'ko' ? '새 창에서 열기 ↗' : 'Open ↗'}</a>
+          <a href={pdfUrl} download={filename}>{lang === 'ko' ? '다운로드 ↓' : 'Download ↓'}</a>
+        </div>
+      </div>
+      <iframe className="resume-viewer" src={pdfUrl} title="Changho Park résumé PDF" />
+    </div>
   )
 }

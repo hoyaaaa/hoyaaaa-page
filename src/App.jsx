@@ -1,8 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
-import About from './pages/About'
-import Apps from './pages/Apps'
-import Donate from './pages/Donate'
+import Home from './pages/Home'
+import Work from './pages/Work'
 import Resume from './pages/Resume'
 
 export default function App() {
@@ -10,10 +9,12 @@ export default function App() {
     <BrowserRouter>
       <Layout>
         <Routes>
-          <Route path="/" element={<About />} />
-          <Route path="/apps" element={<Apps />} />
-          <Route path="/donate" element={<Donate />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/work" element={<Work />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/apps" element={<Navigate to="/work" replace />} />
+          <Route path="/donate" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>
     </BrowserRouter>
