@@ -3,43 +3,39 @@ import { useLang } from '../context/LanguageContext'
 
 const copy = {
   ko: {
-    title: '안녕하세요. Go로 서버를 만들고 운영하는 박창호입니다.',
-    intro: '서울에서 백엔드 엔지니어로 일하고 있습니다. 인증과 권한, API 계약, 데이터 정합성처럼 서비스의 기반이 되는 부분을 주로 다룹니다.',
-    detail: '모호한 정책을 코드로 옮길 때 생기는 빈틈을 찾고, 운영 중 발견한 문제를 재현 가능한 테스트로 남기는 일을 좋아합니다. 필요하다면 웹 클라이언트와 배포 파이프라인까지 경계를 넘나듭니다.',
-    currentLabel: '지금',
-    current: 'Unboxers에서 교육 운영 플랫폼의 Go 백엔드를 개발하고 있습니다.',
+    title: '안녕하세요. Go 백엔드 개발자 박창호입니다.',
+    intro: '현재 Unboxers에서 교육 운영 플랫폼의 서버를 개발하고 있습니다. 그전에는 삼성전자에서 Bixby 음성 인식 모델의 학습·배포 시스템과 분석 도구를 만들었습니다.',
+    detail: '요즘은 로그인과 권한 관리, API 설계, PostgreSQL을 자주 다룹니다. 문제가 생기면 먼저 재현하고, 같은 문제가 다시 생기지 않도록 테스트를 남기는 편입니다.',
     resume: 'PDF 이력서 보기',
     experienceTitle: '경력',
     experience: [
-      ['2024–현재', 'Unboxers Corp', 'Backend Engineer', 'Go 기반 서비스와 인증·권한 체계, PostgreSQL 데이터 모델, OpenAPI 계약을 개발하고 운영합니다.'],
-      ['2019–2024', 'Samsung Electronics', 'Software Engineer, AI Development Group', 'Bixby 음성 인식 모델의 학습·배포 파이프라인과 품질 분석 도구를 만들었습니다.'],
+      ['2024–현재', 'Unboxers Corp', 'Backend Engineer', 'Go로 교육 운영 플랫폼의 API를 만들고 있습니다. 로그인과 권한 관리, PostgreSQL 스키마, OpenAPI 문서를 주로 맡습니다.'],
+      ['2019–2024', 'Samsung Electronics', 'Software Engineer, AI Development Group', 'Bixby 음성 인식 모델을 학습하고 배포하는 시스템과 성능을 분석하는 내부 도구를 만들었습니다.'],
       ['2015', 'Samsung Electronics', 'Software Engineering Intern', 'S-Voice 메타데이터를 분석하고 품질 지표를 시각화했습니다.'],
     ],
     workTitle: '공개 작업',
-    workIntro: '최근 회사 작업은 비공개 저장소에 있습니다. 아래는 업무 밖에서 만들거나 기여한 코드 중 몇 가지입니다.',
+    workIntro: '회사 코드는 공개할 수 없어서, 여기에는 개인적으로 만든 것과 오픈소스 기여만 모았습니다. 필요해서 하나씩 만든 것들이라 분야는 꽤 제각각입니다.',
     allWork: '전체 작업 보기',
     filmTitle: '영화',
-    filmBody: '영화를 좋아합니다. 익숙한 세계를 조금 다르게 보게 만드는 이야기, 그리고 혼란 속에서도 사람을 놓치지 않는 이야기를 오래 기억합니다.',
+    filmBody: '일하지 않을 때는 영화를 자주 봅니다. 《Everything Everywhere All at Once》의 이 대사를 특히 좋아합니다.',
     filmSource: 'Everything Everywhere All at Once (2022)',
   },
   en: {
-    title: 'Hello. I’m Changho Park, a backend engineer building and operating servers in Go.',
-    intro: 'I work in Seoul, mostly on the foundations of production services: identity, authorization, API contracts, and data integrity.',
-    detail: 'I like finding gaps when ambiguous policies become code, and turning production problems into reproducible tests. When a system boundary calls for it, I work across web clients and delivery pipelines too.',
-    currentLabel: 'Now',
-    current: 'Building the Go backend for an education operations platform at Unboxers.',
+    title: 'Hello. I’m Changho Park, a backend engineer working with Go.',
+    intro: 'I currently build the server for an education operations platform at Unboxers. Before that, I worked at Samsung on training and deployment systems for Bixby speech-recognition models and the tools used to analyze them.',
+    detail: 'These days I spend most of my time on sign-in, permissions, APIs, and PostgreSQL. When something breaks, I reproduce it first and add a test so the same problem does not come back.',
     resume: 'View PDF résumé',
     experienceTitle: 'Experience',
     experience: [
-      ['2024–present', 'Unboxers Corp', 'Backend Engineer', 'Building and operating Go services, identity and authorization, PostgreSQL data models, and OpenAPI contracts.'],
-      ['2019–2024', 'Samsung Electronics', 'Software Engineer, AI Development Group', 'Built training and deployment pipelines for Bixby speech-recognition models and tools for quality analysis.'],
+      ['2024–present', 'Unboxers Corp', 'Backend Engineer', 'Building APIs for an education operations platform in Go, mainly working on sign-in, permissions, PostgreSQL schemas, and OpenAPI documentation.'],
+      ['2019–2024', 'Samsung Electronics', 'Software Engineer, AI Development Group', 'Built systems that trained and deployed Bixby speech-recognition models, along with internal tools for analyzing model performance.'],
       ['2015', 'Samsung Electronics', 'Software Engineering Intern', 'Analyzed S-Voice metadata and visualized product quality metrics.'],
     ],
     workTitle: 'Public work',
-    workIntro: 'Most of my recent company work lives in private repositories. Here are a few things I have built or contributed to outside work.',
+    workIntro: 'I cannot share my company repositories, so this list contains personal projects and open-source contributions. They cover a few different areas because most began with something I needed myself.',
     allWork: 'See all work',
     filmTitle: 'Films',
-    filmBody: 'I love films that make a familiar world look a little different, and stories that do not lose sight of people even in the middle of chaos.',
+    filmBody: 'I watch a lot of films outside work. This is one line from Everything Everywhere All at Once that has stayed with me.',
     filmSource: 'Everything Everywhere All at Once (2022)',
   },
 }
@@ -47,20 +43,20 @@ const copy = {
 const featured = [
   {
     title: 'nsfw_detector_flutter', stack: 'Flutter · TensorFlow Lite',
-    ko: '이미지를 외부로 보내지 않고 기기 안에서 분류하는 Flutter 패키지입니다.',
-    en: 'On-device image classification for Flutter; images never leave the device.',
+    ko: 'Flutter 앱에서 이미지를 서버로 보내지 않고 분류하려고 만든 패키지입니다.',
+    en: 'A Flutter package I made to classify images without sending them to a server.',
     url: 'https://github.com/hoyaaaa/nsfw_detector_flutter',
   },
   {
     title: 'trackpoint-daemon-macos', stack: 'Objective-C · macOS HID',
-    ko: 'ThinkPad TrackPoint 키보드의 스크롤과 키 동작을 macOS에 맞게 고치는 메뉴 막대 도구입니다.',
-    en: 'A menu-bar utility that makes TrackPoint scrolling and key behavior work naturally on macOS.',
+    ko: 'ThinkPad TrackPoint 키보드를 맥에서도 제대로 쓰려고 만든 메뉴 막대 도구입니다.',
+    en: 'A menu-bar utility I made to use my TrackPoint keyboard properly on a Mac.',
     url: 'https://github.com/hoyaaaa/trackpoint-daemon-macos',
   },
   {
     title: 'AoE2DE Font Mod', stack: 'Python · FreeType · DDS',
-    ko: 'macOS용 Age of Empires II에서 한글 폰트를 쓸 수 있도록 텍스처 아틀라스를 다시 만드는 도구입니다.',
-    en: 'A tool that rebuilds texture atlases to bring Korean fonts to Age of Empires II on macOS.',
+    ko: 'macOS용 Age of Empires II의 한글 폰트 문제를 고치려고 만든 도구입니다.',
+    en: 'A tool I made to fix Korean font rendering in Age of Empires II on macOS.',
     url: 'https://github.com/hoyaaaa/aoe2de-font-mod',
   },
 ]
@@ -74,7 +70,6 @@ export default function Home() {
       <section className="intro">
         <h1>{t.title}</h1>
         <div className="intro-copy"><p>{t.intro}</p><p>{t.detail}</p></div>
-        <p className="current-note"><strong>{t.currentLabel}</strong>{t.current}</p>
         <Link className="text-link" to="/resume">{t.resume} <span aria-hidden="true">→</span></Link>
       </section>
 

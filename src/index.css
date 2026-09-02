@@ -56,9 +56,7 @@ button { color: inherit; font: inherit; }
 .intro h1, .page-intro h1 { margin: 0; font-size: clamp(34px, 5vw, 52px); line-height: 1.28; letter-spacing: -.035em; word-break: keep-all; }
 .intro-copy { max-width: 680px; margin-top: 34px; }
 .intro-copy p, .page-intro > p { margin: 0 0 14px; font-size: 16px; line-height: 1.85; word-break: keep-all; }
-.current-note { margin: 28px 0 18px; padding-left: 14px; border-left: 3px solid #a8a8a3; color: #454545; font-size: 14px; line-height: 1.7; word-break: keep-all; }
-.current-note strong { margin-right: 12px; color: var(--ink); }
-.text-link { color: var(--link); text-decoration: underline; text-underline-offset: 4px; }
+.text-link { display: inline-block; margin-top: 8px; color: var(--link); text-decoration: underline; text-underline-offset: 4px; }
 .text-link:hover { color: #0b3d7a; }
 .text-link.small { font-size: 13px; }
 
