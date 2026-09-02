@@ -55,28 +55,28 @@ const s = StyleSheet.create({
 
 const content = {
   ko: {
-    headline: 'Go로 신뢰할 수 있는 프로덕션 시스템을 만드는 백엔드 엔지니어',
-    about: '인증과 권한, API 계약, 데이터 경계처럼 정확해야 하는 영역을 중심으로 Go 서버를 개발하고 운영합니다. 모호한 정책을 명시적인 계약으로 바꾸고, 운영 문제를 재현 가능한 테스트와 작은 변경으로 해결하는 일을 좋아합니다. 클라이언트 개발 경험을 바탕으로 서버와 화면 양쪽의 경계를 함께 설계합니다.',
-    section: { about: 'ABOUT', experience: 'EXPERIENCE', skills: 'CORE SKILLS', projects: 'SELECTED PUBLIC WORK', education: 'EDUCATION & ACTIVITIES', principles: 'ENGINEERING PRINCIPLES' },
+    headline: 'Go Backend Engineer',
+    about: '현재 Unboxers에서 Go로 교육 운영 플랫폼의 서버를 개발하고 있습니다. 로그인과 권한 관리, PostgreSQL 스키마, OpenAPI 문서를 주로 맡고 있으며 웹 클라이언트와 배포 과정도 함께 봅니다. 이전에는 삼성전자에서 Bixby 음성 인식 모델의 학습·배포 시스템과 품질 분석 도구를 만들었습니다.',
+    section: { about: 'PROFILE', experience: 'EXPERIENCE', skills: 'SKILLS', projects: 'PUBLIC PROJECTS', education: 'EDUCATION & ACTIVITIES', principles: 'HOW I WORK' },
     experience: [
       {
         company: 'Unboxers Corp', role: 'Backend Engineer', date: '2024 — 현재',
         bullets: [
-          '교육 운영 플랫폼의 Go 백엔드와 여러 웹 클라이언트가 공유하는 API·데이터 계약을 개발하고 운영합니다.',
-          '역할·스코프 기반 접근 제어, Bearer·쿠키 인증, 단기 Context Token, 감사 로그를 fail-closed 정책으로 설계했습니다.',
-          'PostgreSQL을 권한과 도메인 데이터의 원본으로 두고 OpenAPI, RLS projection, 스키마 변화와 단계적 롤아웃 경계를 연결했습니다.',
-          '운영 중복 요청과 지연을 계측해 동일 동시 요청을 하나의 DB 조회로 병합하고 race·회귀 테스트로 고정했습니다.',
-          '백엔드뿐 아니라 TypeScript 웹 클라이언트, E2E, Grafana 관측 지표와 CI까지 필요한 경계를 직접 연결합니다.',
+          '교육 운영 플랫폼의 Go API를 개발하고, 여러 웹 클라이언트가 함께 사용하는 요청·응답 스키마를 관리합니다.',
+          '역할과 스코프에 따른 권한 검사를 구현하고 Bearer Token, 쿠키 로그인, 단기 Context Token의 인증 흐름을 정리했습니다.',
+          'PostgreSQL 스키마와 OpenAPI 문서를 함께 관리하고, 기존 클라이언트가 깨지지 않도록 변경 사항을 단계적으로 배포합니다.',
+          '동시에 들어온 같은 요청이 DB를 반복 조회하던 문제를 찾아 한 번의 조회를 공유하도록 수정하고 race·회귀 테스트를 추가했습니다.',
+          'TypeScript 웹 클라이언트, E2E 테스트, Grafana 대시보드와 GitHub Actions도 서버 변경에 맞춰 함께 수정합니다.',
         ],
         tags: ['Go', 'PostgreSQL', 'OpenAPI', 'Supabase', 'Grafana', 'Docker', 'GitHub Actions'],
       },
       {
         company: 'Samsung Electronics', role: 'Software Engineer · AI Development Group', date: '2019 — 2024',
         bullets: [
-          'Bixby 음성 인식 Language Model의 학습·검증·글로벌 프로덕션 배포 파이프라인을 설계하고 자동화했습니다.',
-          '수억 건 규모 음성 데이터 전처리와 비동기 분석 파이프라인을 개발하고 처리 효율과 운영 가시성을 개선했습니다.',
-          'WER, 인식률, 응답 지연을 비교·분석하는 내부 웹 도구와 실시간 KPI 대시보드를 풀스택으로 개발했습니다.',
-          '모델 성능 모니터링과 Jenkins·CircleCI 기반 학습·배포 CI/CD 체계를 구축했습니다.',
+          'Bixby 음성 인식 Language Model의 학습, 검증, 글로벌 배포 과정을 자동화했습니다.',
+          '수억 건의 음성 데이터를 전처리하고 비동기로 분석하는 Python 파이프라인을 개발했습니다.',
+          'WER, 인식률, 응답 시간을 버전별로 비교하는 내부 웹 도구와 실시간 KPI 대시보드를 만들었습니다.',
+          '모델 상태를 모니터링하고 Jenkins·CircleCI로 학습과 배포를 실행하는 CI/CD 환경을 구축했습니다.',
         ],
         tags: ['Python', 'FastAPI', 'Celery', 'Redis', 'TensorFlow', 'AWS', 'Jenkins', 'CircleCI'],
       },
@@ -87,49 +87,49 @@ const content = {
       },
     ],
     skills: [
-      ['Backend', 'Go, Python, HTTP APIs, OpenAPI, authentication, authorization, idempotency'],
-      ['Data', 'PostgreSQL, MySQL, Redis, Supabase, schema evolution, RLS'],
-      ['Reliability', 'Observability, concurrency, race testing, performance profiling, incident response'],
-      ['Delivery', 'Docker, GitHub Actions, Jenkins, CircleCI, staged rollout and rollback'],
-      ['Clients', 'TypeScript, React, Flutter — enough to design both sides of an API boundary'],
+      ['Backend', 'Go, Python, HTTP APIs, OpenAPI, authentication, authorization'],
+      ['Data', 'PostgreSQL, MySQL, Redis, Supabase, schema migration, RLS'],
+      ['Testing & Operations', 'Go race tests, E2E, Grafana, performance profiling, incident debugging'],
+      ['Build & Delivery', 'Docker, GitHub Actions, Jenkins, CircleCI'],
+      ['Client', 'TypeScript, React, Flutter'],
     ],
     projects: [
-      ['nsfw_detector_flutter', 'PACKAGE · 2026', '이미지를 외부 서버로 보내지 않는 Flutter 온디바이스 분류 패키지. isolate, GPU fallback, 배치 처리와 런타임 회귀 테스트를 제공합니다.', 'github.com/hoyaaaa/nsfw_detector_flutter'],
-      ['trackpoint-daemon-macos', 'SYSTEM UTILITY · 2026', 'CGEventTap과 IOHID를 활용해 ThinkPad TrackPoint 키보드의 스크롤, 키 매핑, 포인터 동작을 macOS에 맞게 구현했습니다.', 'github.com/hoyaaaa/trackpoint-daemon-macos'],
-      ['AoE2DE Font Mod', 'TOOLING · 2026', '게임의 코드포인트를 읽고 글리프와 DDS 텍스처 아틀라스를 재생성해 macOS 버전에 한글 폰트를 적용합니다.', 'github.com/hoyaaaa/aoe2de-font-mod'],
-      ['pgschema', 'OPEN SOURCE · 2026', '임시 스키마 이름 변경 이후 뷰 정의가 흔들리는 문제를 정규화하는 Go 수정 사항을 upstream에 기여했습니다.', 'github.com/pgplex/pgschema/pull/520'],
+      ['nsfw_detector_flutter', 'FLUTTER PACKAGE · 2026', '이미지를 서버로 보내지 않고 기기에서 분류하는 패키지입니다. isolate 실행, GPU 실패 시 CPU 전환, 배치 처리와 회귀 테스트를 구현했습니다.', 'github.com/hoyaaaa/nsfw_detector_flutter'],
+      ['trackpoint-daemon-macos', 'MACOS UTILITY · 2026', 'CGEventTap과 IOHID로 TrackPoint Keyboard II의 중간 버튼 스크롤, 키 재매핑, 포인터 감도와 가속을 구현했습니다.', 'github.com/hoyaaaa/trackpoint-daemon-macos'],
+      ['AoE2DE Font Mod', 'PYTHON TOOL · 2026', 'macOS용 Age of Empires II의 한글 폰트 문제를 해결하기 위해 글리프를 렌더링하고 DDS 텍스처 아틀라스를 다시 만듭니다.', 'github.com/hoyaaaa/aoe2de-font-mod'],
+      ['pgschema', 'OPEN SOURCE · 2026', '임시 스키마 이름 변경 뒤 PostgreSQL 뷰 정의가 달라지는 문제를 Go로 수정했으며, 패치가 upstream에 반영됐습니다.', 'github.com/pgplex/pgschema/pull/520'],
     ],
     education: [
       ['한양대학교', '컴퓨터공학부 · 2013 — 2019'],
       ['경남과학고등학교', '2011 — 2013'],
       ['Samsung SDS ICT Membership', 'sGen Club 개발자 트랙 · 2014 — 2015'],
     ],
-    principles: '명시적인 계약을 숨은 가정보다 선호합니다. 자신감 있는 추측보다 검증 가능한 증거를, 큰 재작성보다 문제를 온전히 해결하는 가장 작은 변경을 선택합니다.',
+    principles: '문제가 생기면 로그와 테스트로 먼저 재현합니다. 수정한 뒤에는 같은 문제가 다시 생기지 않도록 회귀 테스트를 남기고, 배포 후 지표까지 확인합니다.',
   },
   en: {
-    headline: 'Backend engineer building reliable production systems in Go',
-    about: 'I build and operate Go services around the parts where correctness matters most: identity, authorization, API contracts, and data boundaries. I enjoy turning ambiguous policies into explicit contracts, and production incidents into reproducible tests and small, measurable changes. My client-side background helps me design both sides of an API boundary.',
-    section: { about: 'ABOUT', experience: 'EXPERIENCE', skills: 'CORE SKILLS', projects: 'SELECTED PUBLIC WORK', education: 'EDUCATION & ACTIVITIES', principles: 'ENGINEERING PRINCIPLES' },
+    headline: 'Go Backend Engineer',
+    about: 'I currently build the server for an education operations platform at Unboxers in Go. My main areas are sign-in and permissions, PostgreSQL schemas, and OpenAPI documentation, and I also work on the web clients and delivery pipeline when needed. Previously, I built training and deployment systems and quality-analysis tools for Bixby speech-recognition models at Samsung.',
+    section: { about: 'PROFILE', experience: 'EXPERIENCE', skills: 'SKILLS', projects: 'PUBLIC PROJECTS', education: 'EDUCATION & ACTIVITIES', principles: 'HOW I WORK' },
     experience: [
-      { company: 'Unboxers Corp', role: 'Backend Engineer', date: '2024 — PRESENT', bullets: ['Build and operate Go services and shared API/data contracts across an education operations platform and its web clients.', 'Designed fail-closed role- and scope-based access control spanning bearer and cookie authentication, short-lived context tokens, and audit trails.', 'Connected PostgreSQL as the source of truth with OpenAPI contracts, RLS projections, schema evolution, and staged rollout boundaries.', 'Measured a production request fan-out and coalesced identical concurrent work into one database read, locked down with race and regression tests.', 'Work across Go services, TypeScript clients, E2E coverage, Grafana telemetry, and CI when a system boundary requires it.'], tags: ['Go', 'PostgreSQL', 'OpenAPI', 'Supabase', 'Grafana', 'Docker', 'GitHub Actions'] },
-      { company: 'Samsung Electronics', role: 'Software Engineer · AI Development Group', date: '2019 — 2024', bullets: ['Designed and automated training, validation, and global production deployment pipelines for Bixby speech-recognition language models.', 'Built preprocessing and asynchronous analytics pipelines over hundreds of millions of speech records.', 'Developed internal full-stack tools for WER, recognition quality, latency analysis, and real-time KPI visualization.', 'Established model monitoring and CI/CD workflows with Jenkins and CircleCI.'], tags: ['Python', 'FastAPI', 'Celery', 'Redis', 'TensorFlow', 'AWS', 'Jenkins', 'CircleCI'] },
+      { company: 'Unboxers Corp', role: 'Backend Engineer', date: '2024 — PRESENT', bullets: ['Build Go APIs and maintain request and response schemas shared by several web clients for an education operations platform.', 'Implemented role- and scope-based authorization and organized authentication flows for bearer tokens, cookie sessions, and short-lived context tokens.', 'Maintain PostgreSQL schemas and OpenAPI documentation together, rolling out changes in stages so existing clients continue to work.', 'Found repeated database reads from identical concurrent requests, changed them to share one read, and added race and regression tests.', 'Update TypeScript clients, E2E tests, Grafana dashboards, and GitHub Actions when a server change requires it.'], tags: ['Go', 'PostgreSQL', 'OpenAPI', 'Supabase', 'Grafana', 'Docker', 'GitHub Actions'] },
+      { company: 'Samsung Electronics', role: 'Software Engineer · AI Development Group', date: '2019 — 2024', bullets: ['Automated training, validation, and global deployment for Bixby speech-recognition language models.', 'Built Python pipelines to preprocess and asynchronously analyze hundreds of millions of speech records.', 'Made internal web tools for comparing WER, recognition quality, and response times by model version, plus real-time KPI dashboards.', 'Set up model monitoring and CI/CD for training and deployment with Jenkins and CircleCI.'], tags: ['Python', 'FastAPI', 'Celery', 'Redis', 'TensorFlow', 'AWS', 'Jenkins', 'CircleCI'] },
       { company: 'Samsung Electronics', role: 'Software Engineering Intern · Voice Service', date: '2015', bullets: ['Analyzed S-Voice metadata quality metrics with R and Hadoop and produced visualization reports.'], tags: ['R', 'Hadoop'] },
     ],
     skills: [
-      ['Backend', 'Go, Python, HTTP APIs, OpenAPI, authentication, authorization, idempotency'],
-      ['Data', 'PostgreSQL, MySQL, Redis, Supabase, schema evolution, RLS'],
-      ['Reliability', 'Observability, concurrency, race testing, performance profiling, incident response'],
-      ['Delivery', 'Docker, GitHub Actions, Jenkins, CircleCI, staged rollout and rollback'],
-      ['Clients', 'TypeScript, React, Flutter — enough to design both sides of an API boundary'],
+      ['Backend', 'Go, Python, HTTP APIs, OpenAPI, authentication, authorization'],
+      ['Data', 'PostgreSQL, MySQL, Redis, Supabase, schema migration, RLS'],
+      ['Testing & Operations', 'Go race tests, E2E, Grafana, performance profiling, incident debugging'],
+      ['Build & Delivery', 'Docker, GitHub Actions, Jenkins, CircleCI'],
+      ['Client', 'TypeScript, React, Flutter'],
     ],
     projects: [
-      ['nsfw_detector_flutter', 'PACKAGE · 2026', 'On-device image classification for Flutter with background isolates, GPU fallback, batching, and hardened runtime tests.', 'github.com/hoyaaaa/nsfw_detector_flutter'],
-      ['trackpoint-daemon-macos', 'SYSTEM UTILITY · 2026', 'A CGEventTap and IOHID menu-bar daemon that makes TrackPoint scrolling, key mapping, and pointer behavior native on macOS.', 'github.com/hoyaaaa/trackpoint-daemon-macos'],
-      ['AoE2DE Font Mod', 'TOOLING · 2026', 'Rebuilds glyphs and DDS texture atlases from the game’s codepoint map to bring Korean fonts to the macOS version.', 'github.com/hoyaaaa/aoe2de-font-mod'],
-      ['pgschema', 'OPEN SOURCE · 2026', 'Contributed a Go fix that normalizes view definitions after temporary schema renames in declarative Postgres migrations.', 'github.com/pgplex/pgschema/pull/520'],
+      ['nsfw_detector_flutter', 'FLUTTER PACKAGE · 2026', 'Classifies images on the device without sending them to a server. Includes isolate execution, GPU-to-CPU fallback, batching, and regression tests.', 'github.com/hoyaaaa/nsfw_detector_flutter'],
+      ['trackpoint-daemon-macos', 'MACOS UTILITY · 2026', 'Uses CGEventTap and IOHID to add middle-button scrolling, key remapping, pointer sensitivity, and acceleration for the TrackPoint Keyboard II.', 'github.com/hoyaaaa/trackpoint-daemon-macos'],
+      ['AoE2DE Font Mod', 'PYTHON TOOL · 2026', 'Fixes Korean font rendering in Age of Empires II on macOS by rendering glyphs and rebuilding DDS texture atlases.', 'github.com/hoyaaaa/aoe2de-font-mod'],
+      ['pgschema', 'OPEN SOURCE · 2026', 'Fixed PostgreSQL view definitions changing after a temporary schema rename. The Go patch was accepted upstream.', 'github.com/pgplex/pgschema/pull/520'],
     ],
     education: [['Hanyang University', 'B.S. in Computer Science & Engineering · 2013 — 2019'], ['Gyeongnam Science High School', '2011 — 2013'], ['Samsung SDS ICT Membership', 'sGen Club developer track · 2014 — 2015']],
-    principles: 'I prefer explicit contracts over hidden assumptions, verifiable evidence over confident guesses, and the smallest change that fully solves the problem over a sweeping rewrite.',
+    principles: 'When something breaks, I reproduce it with logs and a test first. After the fix, I leave a regression test and check the production metrics after deployment.',
   },
 }
 
@@ -244,7 +244,7 @@ export default function Resume() {
   return (
     <div className="resume-page">
       <div className="resume-toolbar">
-        <p>{lang === 'ko' ? '현재 GitHub 활동과 경력을 반영한 2페이지 PDF 이력서' : 'A two-page PDF résumé based on current work and GitHub activity'}</p>
+        <p>{lang === 'ko' ? '2페이지 · 2026년 9월 업데이트' : '2 pages · Updated September 2026'}</p>
         <div className="resume-actions">
           <a href={pdfUrl} target="_blank" rel="noreferrer">{lang === 'ko' ? '새 창에서 열기 ↗' : 'Open ↗'}</a>
           <a href={pdfUrl} download={filename}>{lang === 'ko' ? '다운로드 ↓' : 'Download ↓'}</a>
