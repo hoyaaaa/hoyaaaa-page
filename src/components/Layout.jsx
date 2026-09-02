@@ -1,14 +1,12 @@
-import ResponsiveAppBar from './AppBar'
+import AppBar from './AppBar'
 import Footer from './Footer'
 
 export default function Layout({ children }) {
   return (
-    <section style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
-      <ResponsiveAppBar />
-      <article style={{ flex: 1, overflow: 'auto' }}>
-        {children}
-      </article>
+    <div className="site-shell">
+      <AppBar />
+      <main>{children}</main>
       <Footer />
-    </section>
+    </div>
   )
 }

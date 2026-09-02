@@ -1,15 +1,26 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
-const LanguageContext = createContext()
+const LanguageContext = createContext(null)
 
 export function LanguageProvider({ children }) {
-  const [lang, setLang] = useState('ko')
-  const toggle = () => setLang(l => l === 'ko' ? 'en' : 'ko')
+  const [lang, setLang] = useState(() => localStorage.getItem('hoya-lang') || 'ko')
+
+  useEffect(() => {
+    localStorage.setItem('hoya-lang', lang)
+    document.documentElement.lang = lang
+  }, [lang])
+
+  const toggle = () => setLang((current) => current === 'ko' ? 'en' : 'ko')
+
   return (
-    <LanguageContext.Provider value={{ lang, toggle }}>
+    <LanguageContext.Provider value={{ lang, setLang, toggle }}>
       {children}
     </LanguageContext.Provider>
   )
 }
 
-export const useLang = () => useContext(LanguageContext)
+export function useLang() {
+  const context = useContext(LanguageContext)
+  if (!context) throw new Error('useLang must be used inside LanguageProvider')
+  return context
+}
